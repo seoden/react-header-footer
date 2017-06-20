@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        .none {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+
+<script type="text/jsx">
+    var Badge = React.createClass({
+        getInitialState: function() {
+            return {
+                visible: false
+            };
+        },
+        readmoreClick: function(e) {
+            e.preventDefault();
+            this.setState({visible: true});
+        },
+        render: function() {
+            var visible = this.state.visible;
+            return <button className="btn btn-primary" type="button" onClick={this.readmoreClick}>
+                {this.props.title} <span className={'badge ' + (visible ? '': 'none')}>{this.props.number}</span>
+            </button>
+        }
+    });
+    var Layout = React.createClass({
+        render: function () {
+            return <div className="layout">
+                <Badge
+                    title={this.props.title}
+                    number={this.props.number}
+                />
+            </div>
+        }
+    });
+    var options = {
+            title: 'Show Courses',
+            number: 120
+    };
+    var element = React.createElement(Layout, options);
+    React.render(element, document.body);
+</script>
+
+</html>
